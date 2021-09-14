@@ -3,6 +3,7 @@ version: '3'
 services:
 
   mongo1: # Primary mongo server
+    container_name: mongo1
     image: "mongo-main:latest"
     build: ./mongo-GVDrs-1
     networks: 
@@ -13,6 +14,7 @@ services:
       - mongo-data-1:/data/db
     
   mongo2: #Secondary mongo server
+    container_name: mongo2
     image: "mongo2:latest"
     build: ./mongo-GVDrs-1
     command: --replSet GVDrs --bind_ip_all --oplogSize 50
@@ -24,6 +26,7 @@ services:
       - mongo-data-2:/data/db
 
   mongo3: #Secondary mongo server (Arbiter)
+    container_name: mongo3
     image: "mongo3:latest"
     build: ./mongo-GVDrs-1
     command: --replSet GVDrs --bind_ip_all --oplogSize 50
@@ -35,6 +38,7 @@ services:
       - mongo-data-3:/data/db
 
   setup-GVDrs:
+    container_name: setup
     image: "setup-rs"
     build: ./setup
     networks: 

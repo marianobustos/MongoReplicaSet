@@ -6,8 +6,7 @@ WORKDIR /etc
 # Copy configs to container root
 COPY config/ .
 
-EXPOSE 27017
+# For debug only
+#RUN apt-get update && apt-get install -y iputils-ping
 
-RUN apt-get update && apt-get install -y iputils-ping
-
-CMD ["mongod", "--config", "./mongod.conf.orig", "--bind_ip_all"]
+CMD ["mongod", "--config", "./mongod.conf"]
